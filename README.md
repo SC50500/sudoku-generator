@@ -1,4 +1,4 @@
-# SudokuS
+# SSdoku
 Sophia Chan
 
 # Description
