@@ -1,0 +1,26 @@
+Program Overview
+This project randomly generates a validated sudoku board using Math.random(), a 2D Array, an ArrayList, and a recursive function. It individually generates the numbers for each element on the sudoku board, applying the constraints of a regular sudoku board to do so.
+
+Data Structures
+I used a 2D array to store all of the values as they were being generated. This 2D array was then printed as the Sudoku board.
+I also used an ArrayList to store all possible values (1-9) for each element on the board. As the generate method tested multiple values for each element, depending on the isValid method, numbers would be removed from the ArrayList until at least one valid number is returned. Using an ArrayList was easier for me because the size of ArrayLists change as elements are added and removed. 
+
+Algorithm Design
+The "generate" method accepts two parameters (row and column) to generate a valid number for that specific element in the 9x9 puzzle grid. In the "generate" method, each number that is considered for placement on the board is run through an "isValid" method, that double checks (per the constraints of a regular sudoku board) whether or not the number is already present in the same column, row, or 3x3 grid. If the number considered is not valid, then the code randomly generates another number from 1-9 (minus the invalid number(s)) and tests again. This process is what makes the "generate" method recursive. The "generate" method's base case is when the method has fill in the last row and last column. After the board is filled, it is printed and each 3x3 grid is divided as shown in the video. 
+
+Methods
+a.  public static boolean generate(int row, int col)
+    This method generates the entire board, iterating through each individual cell in the 9x9 puzzle grid. It is a recursive process that runs another function (isValid) to check for a valid number to place in each cell. It also backtracks if any of the elements places results in an invalid board. 
+b.  public static boolean isValid(int row, int col, int num)
+    This method checks if num, placed in (row, col) of the puzzle grid, is valid. If num already exists in the same row as row, same column as col, or same 3x3 grid based on (row, col) of the already generated cells in the puzzle grid, then the function returns false. Otherwise, it returns true.
+c.  public static void printPuzzle()
+    This method uses a series of for loops and if-statements to print the 9x9 puzzle grid to the console, adding dividers every 3 rows and 3 columns. 
+
+Testing plan 
+I tested my program in CodeHS's Java Sandbox, which helped me visualize how the code ran without worrying about potential github-related issues that may appear. Also, I was more familiar working with CodeHS. 
+a.  I first tested by working on the print function, filling the 9x9 2D Array with zeroes before running the print function in main. This helped me visualize and debug the print function so that when I wrote the generate and isValid functions, I wouldn't have to worry about the printed result in the console being inaccurate.
+b.  I then wrote and tested the generate code by creating an ArrayList of numbers from 1-9 and randomly placing them in each cell of the 9x9 puzzle. At this stage, the board was not yet validated, so many of the values did not adhere to the requirements a sudoku board would have. Additionally, the generate function was not recursive. I ran this code a few times to ensure that the entire board was filled with numbers from 1-9
+c.  Finally, I wrote and tested the isValid function. I tested each constraint (row, col, block) individually to ensure that there were no individual issues with each of the code segments. Then, I realized that with the addition of the constraints and isValid method, the generate method needed to be recursive, so I began to test each cell individually and modified the generate code to only generate segments of the board to ensure that the validation method worked as well as the newly modified recursive generate code. 
+
+Challenges and Solutions
+One of the main challenges I faced was transitioning from a generate method that did not use recursion to a generate method that used it efficiently. Although my original train of thought for this project was in the right direction, implementing it in a recursive function was much more difficult. I wasn't too sure what the base case would look like and if there were any exit cases. Additionally, ensuring that numbers were removed from the original ArrayList properly and dealing with cases like when the ArrayList was empty was annoying. I found it frustrating that the order and specific implementation of different lines of code could either make or break the generate method. One of the websites that helped me most was java visualizer. It helped me pinpoint which parts of my code didn't iterate properly so that I could directly fix it. 
